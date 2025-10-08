@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 export default function HomePage() {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen bg-[#d4d9c8]">
       {/* Main content */}
@@ -28,10 +32,16 @@ export default function HomePage() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-20">
-            <button className="px-8 py-3 bg-[#2d3e2e] text-[#d4d9c8] rounded-full text-sm hover:bg-[#1a2519] transition-all">
+            <button 
+              onClick={() => navigate("/login")}
+              className="px-8 py-3 bg-[#2d3e2e] text-[#d4d9c8] rounded-full text-sm hover:bg-[#1a2519] transition-all cursor-pointer"
+            >
               Sign In →
             </button>
-            <button className="px-8 py-3 border border-[#2d3e2e] text-[#2d3e2e] rounded-full text-sm hover:bg-[#2d3e2e] hover:text-[#d4d9c8] transition-all">
+            <button 
+              onClick={() => navigate("/register")}
+              className="px-8 py-3 border border-[#2d3e2e] text-[#2d3e2e] rounded-full text-sm hover:bg-[#2d3e2e] hover:text-[#d4d9c8] transition-all cursor-pointer"
+            >
               Create Account →
             </button>
           </div>

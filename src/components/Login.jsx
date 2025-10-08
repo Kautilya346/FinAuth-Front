@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -12,7 +13,7 @@ export default function Login() {
     if (loading) return;
     setLoading(true);
     try {
-      const apiUrl = `${import.meta.env.VITE_API_URL}/login`;
+      const apiUrl = `${import.meta.env.VITE_API_URL}/api/auth/login`;
       const res = await fetch(apiUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -23,7 +24,8 @@ export default function Login() {
         const json = await res.json();
         console.log("Login success:", json);
         alert("Login successful");
-        // TODO: store token / redirect
+        // TODO: store token
+        navigate("/");
       } else {
         const text = await res.text();
         console.error("Login failed:", res.status, text);

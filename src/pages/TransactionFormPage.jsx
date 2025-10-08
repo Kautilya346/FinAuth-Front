@@ -7,13 +7,39 @@ export default function TransactionFormPage() {
     receiverAccount: "",
     receiverName: "",
     description: "",
+    latitude: "",
+    longitude: "",
   });
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
+  const [gettingLocation, setGettingLocation] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((f) => ({ ...f, [name]: value }));
+  };
+
+  const getCurrentLocation = () => {
+    if (!navigator.geolocation) {
+      setMessage({ type: "error", text: "Geolocation is not supported by your browser" });
+      return;
+    }
+    setGettingLocation(true);
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setForm((f) => ({
+          ...f,
+          latitude: position.coords.latitude.toFixed(6),
+          longitude: position.coords.longitude.toFixed(6),
+        }));
+        setGettingLocation(false);
+        setMessage({ type: "success", text: "Location captured successfully" });
+      },
+      (error) => {
+        setGettingLocation(false);
+        setMessage({ type: "error", text: `Error getting location: ${error.message}` });
+      }
+    );
   };
 
   const validate = () => {
@@ -35,18 +61,28 @@ export default function TransactionFormPage() {
     setLoading(true);
     setMessage(null);
     try {
+      const payload = {
+        phoneNumber: form.phoneNumber.trim(),
+        amount: Number(form.amount),
+        receiverAccount: form.receiverAccount.trim(),
+        receiverName: form.receiverName.trim() || undefined,
+        description: form.description.trim() || undefined,
+      };
+      
+      // Add geolocation if provided
+      if (form.latitude && form.longitude) {
+        payload.geolocation = {
+          latitude: Number(form.latitude),
+          longitude: Number(form.longitude),
+        };
+      }
+
       const res = await fetch(
         `${import.meta.env.VITE_API_URL}/api/transactions`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            phoneNumber: form.phoneNumber.trim(),
-            amount: Number(form.amount),
-            receiverAccount: form.receiverAccount.trim(),
-            receiverName: form.receiverName.trim() || undefined,
-            description: form.description.trim() || undefined,
-          }),
+          body: JSON.stringify(payload),
         }
       );
       const data = await res.json();
@@ -59,6 +95,8 @@ export default function TransactionFormPage() {
         receiverAccount: "",
         receiverName: "",
         description: "",
+        latitude: "",
+        longitude: "",
       });
     } catch (err) {
       setMessage({ type: "error", text: err.message });
@@ -156,6 +194,100 @@ export default function TransactionFormPage() {
                 className="w-full px-3.5 py-3 bg-white border border-[#2d3e2e]/20 rounded-lg text-[#2d3e2e] placeholder-[#4a5a4a] focus:outline-none focus:ring-2 focus:ring-[#2d3e2e]"
               ></textarea>
             </div>
+            
+            {/* Geolocation Section */}
+            <div className="pt-2 border-t border-[#2d3e2e]/10">
+              <div className="flex items-center justify-between mb-3">
+                <label className="block text-sm text-[#2d3e2e] font-medium">
+                  Geolocation Coordinates (optional)
+                </label>
+                <button
+                  type="button"
+                  onClick={getCurrentLocation}
+                  disabled={gettingLocation}
+                  className="flex items-center gap-2 px-3 py-1.5 text-xs bg-[#2d3e2e] text-[#d4d9c8] rounded-lg hover:bg-[#1a2519] transition-all disabled:bg-gray-600 disabled:cursor-not-allowed"
+                >
+                  {gettingLocation ? (
+                    <>
+                      <svg className="animate-spin h-3 w-3" viewBox="0 0 24 24">
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                          fill="none"
+                        />
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        />
+                      </svg>
+                      Getting...
+                    </>
+                  ) : (
+                    <>
+                      <svg
+                        className="w-3 h-3"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                        />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                        />
+                      </svg>
+                      Use My Location
+                    </>
+                  )}
+                </button>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs text-[#4a5a4a] mb-2">
+                    Latitude
+                  </label>
+                  <input
+                    type="number"
+                    name="latitude"
+                    step="any"
+                    value={form.latitude}
+                    onChange={handleChange}
+                    placeholder="e.g., 40.712776"
+                    className="w-full px-3.5 py-3 bg-white border border-[#2d3e2e]/20 rounded-lg text-[#2d3e2e] placeholder-[#4a5a4a] focus:outline-none focus:ring-2 focus:ring-[#2d3e2e]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs text-[#4a5a4a] mb-2">
+                    Longitude
+                  </label>
+                  <input
+                    type="number"
+                    name="longitude"
+                    step="any"
+                    value={form.longitude}
+                    onChange={handleChange}
+                    placeholder="e.g., -74.005974"
+                    className="w-full px-3.5 py-3 bg-white border border-[#2d3e2e]/20 rounded-lg text-[#2d3e2e] placeholder-[#4a5a4a] focus:outline-none focus:ring-2 focus:ring-[#2d3e2e]"
+                  />
+                </div>
+              </div>
+              <p className="text-xs text-[#4a5a4a] mt-2">
+                Add location data to help verify transaction authenticity
+              </p>
+            </div>
+
             <button
               type="submit"
               disabled={loading}

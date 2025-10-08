@@ -1,9 +1,10 @@
 // src/components/OnboardingRegistration.jsx
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function OnboardingRegistration() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     countryCode: "+91",
@@ -64,7 +65,7 @@ export default function OnboardingRegistration() {
         },
       };
 
-      const apiUrl = `${import.meta.env.VITE_API_URL}/register`;
+      const apiUrl = `${import.meta.env.VITE_API_URL}/api/auth/register`;
 
       const res = await fetch(apiUrl, {
         method: "POST",
@@ -75,7 +76,7 @@ export default function OnboardingRegistration() {
       if (res.ok) {
         const json = await res.json();
         console.log("Registration success:", json);
-        alert("Registration successful!");
+        alert("Registration successful! Please login to continue.");
         setFormData({
           name: "",
           countryCode: "+91",
@@ -87,6 +88,7 @@ export default function OnboardingRegistration() {
           dob: "",
         });
         setIdFile(null);
+        navigate("/login");
       } else {
         const text = await res.text();
         console.error("Registration failed:", res.status, text);
