@@ -38,21 +38,21 @@ export default function Login() {
   };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center p-3 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 overflow-hidden">
+    <div className="relative min-h-screen flex items-center justify-center p-3 bg-[#d4d9c8] overflow-hidden">
       {/* Animated background */}
       <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/3 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob"></div>
-        <div className="absolute bottom-0 right-1/3 w-72 h-72 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
+        <div className="absolute top-0 left-1/3 w-72 h-72 bg-[#2d3e2e] rounded-full mix-blend-multiply filter blur-3xl opacity-5 animate-blob"></div>
+        <div className="absolute bottom-0 right-1/3 w-72 h-72 bg-[#2d3e2e] rounded-full mix-blend-multiply filter blur-3xl opacity-5 animate-blob animation-delay-2000"></div>
       </div>
 
       <div className="relative w-full max-w-md">
         {/* Card */}
-        <div className="bg-white/10 backdrop-blur-xl rounded-2xl shadow-xl border border-white/15 p-6 md:p-8 animate-slide-in-up">
+        <div className="bg-white rounded-2xl shadow-xl border border-[#2d3e2e]/10 p-6 md:p-8 animate-slide-in-up">
           {/* Header */}
           <div className="text-center mb-6">
-            <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl mb-3 shadow-md shadow-indigo-500/40">
+            <div className="inline-flex items-center justify-center w-12 h-12 bg-[#2d3e2e] rounded-xl mb-3">
               <svg
-                className="w-6 h-6 text-white"
+                className="w-6 h-6 text-[#d4d9c8]"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -65,8 +65,10 @@ export default function Login() {
                 />
               </svg>
             </div>
-            <h2 className="text-2xl font-bold text-white mb-1">Welcome Back</h2>
-            <p className="text-gray-300 text-sm">
+            <h2 className="text-2xl font-bold text-[#2d3e2e] mb-1">
+              Welcome Back
+            </h2>
+            <p className="text-[#4a5a4a] text-sm">
               Sign in to your account to continue
             </p>
           </div>
@@ -75,13 +77,13 @@ export default function Login() {
           <form onSubmit={handleSubmit} className="space-y-5">
             {/* Email Input */}
             <div>
-              <label className="block text-sm font-medium text-gray-200 mb-2">
+              <label className="block text-sm font-medium text-[#2d3e2e] mb-2">
                 Email Address
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                   <svg
-                    className="w-4 h-4 text-gray-400"
+                    className="w-4 h-4 text-[#4a5a4a]"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -99,7 +101,7 @@ export default function Login() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full pl-11 pr-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 input-glow"
+                  className="w-full pl-11 pr-4 py-3 bg-white border border-[#2d3e2e]/20 rounded-lg text-[#2d3e2e] placeholder-[#4a5a4a] focus:outline-none focus:ring-2 focus:ring-[#2d3e2e] focus:border-transparent transition-all duration-200"
                   placeholder="you@example.com"
                 />
               </div>
@@ -107,13 +109,13 @@ export default function Login() {
 
             {/* Password Input */}
             <div>
-              <label className="block text-sm font-medium text-gray-200 mb-2">
+              <label className="block text-sm font-medium text-[#2d3e2e] mb-2">
                 Password
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                   <svg
-                    className="w-4 h-4 text-gray-400"
+                    className="w-4 h-4 text-[#4a5a4a]"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -132,13 +134,13 @@ export default function Login() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   minLength={8}
-                  className="w-full pl-11 pr-11 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 input-glow"
+                  className="w-full pl-11 pr-11 py-3 bg-white border border-[#2d3e2e]/20 rounded-lg text-[#2d3e2e] placeholder-[#4a5a4a] focus:outline-none focus:ring-2 focus:ring-[#2d3e2e] focus:border-transparent transition-all duration-200"
                   placeholder="••••••••"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-gray-400 hover:text-white transition-colors"
+                  className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-[#4a5a4a] hover:text-[#2d3e2e] transition-colors"
                 >
                   {showPassword ? (
                     <svg
@@ -181,18 +183,18 @@ export default function Login() {
 
             {/* Remember & Forgot */}
             <div className="flex items-center justify-between text-xs md:text-sm">
-              <label className="flex items-center text-gray-300 cursor-pointer group">
+              <label className="flex items-center text-[#4a5a4a] cursor-pointer group">
                 <input
                   type="checkbox"
-                  className="w-3.5 h-3.5 rounded border-white/20 bg-white/5 text-indigo-600 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-0 transition-all"
+                  className="w-3.5 h-3.5 rounded border-[#2d3e2e]/30 bg-white text-[#2d3e2e] focus:ring-2 focus:ring-[#2d3e2e] focus:ring-offset-0 transition-all"
                 />
-                <span className="ml-2 group-hover:text-white transition-colors">
+                <span className="ml-2 group-hover:text-[#2d3e2e] transition-colors">
                   Remember me
                 </span>
               </label>
               <a
                 href="#"
-                className="text-indigo-400 hover:text-indigo-300 transition-colors"
+                className="text-[#2d3e2e] hover:text-[#1a2519] transition-colors"
               >
                 Forgot password?
               </a>
@@ -202,10 +204,10 @@ export default function Login() {
             <button
               type="submit"
               disabled={loading}
-              className={`w-full py-3.5 rounded-lg font-semibold text-white shadow-md transition-all duration-200 ${
+              className={`w-full py-3.5 rounded-lg font-semibold text-[#d4d9c8] shadow-md transition-all duration-200 ${
                 loading
                   ? "bg-gray-600 cursor-not-allowed"
-                  : "bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 transform hover:scale-[1.02] hover:shadow-indigo-500/50 active:scale-[0.98]"
+                  : "bg-[#2d3e2e] hover:bg-[#1a2519] transform hover:scale-[1.02] active:scale-[0.98]"
               }`}
             >
               {loading ? (
@@ -252,10 +254,10 @@ export default function Login() {
           {/* Divider */}
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-white/10"></div>
+              <div className="w-full border-t border-[#2d3e2e]/10"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-3 bg-white/10 text-gray-400 rounded-full text-xs">
+              <span className="px-3 bg-white text-[#4a5a4a] rounded-full text-xs border border-[#2d3e2e]/10">
                 Or continue with
               </span>
             </div>
@@ -263,7 +265,7 @@ export default function Login() {
 
           {/* Social Login */}
           <div className="grid grid-cols-2 gap-3">
-            <button className="flex items-center justify-center gap-2 px-3.5 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white hover:bg-white/10 transition-all duration-200">
+            <button className="flex items-center justify-center gap-2 px-3.5 py-2.5 bg-white border border-[#2d3e2e]/20 rounded-lg text-[#2d3e2e] hover:bg-[#2d3e2e]/5 transition-all duration-200">
               <svg className="w-4 h-4" viewBox="0 0 24 24">
                 <path
                   fill="currentColor"
@@ -284,7 +286,7 @@ export default function Login() {
               </svg>
               Google
             </button>
-            <button className="flex items-center justify-center gap-2 px-3.5 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white hover:bg-white/10 transition-all duration-200">
+            <button className="flex items-center justify-center gap-2 px-3.5 py-2.5 bg-white border border-[#2d3e2e]/20 rounded-lg text-[#2d3e2e] hover:bg-[#2d3e2e]/5 transition-all duration-200">
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
               </svg>
@@ -293,11 +295,11 @@ export default function Login() {
           </div>
 
           {/* Sign up link */}
-          <p className="mt-6 text-center text-gray-300 text-sm">
+          <p className="mt-6 text-center text-[#4a5a4a] text-sm">
             Don't have an account?{" "}
             <Link
               to="/register"
-              className="font-semibold text-indigo-400 hover:text-indigo-300 transition-colors"
+              className="font-semibold text-[#2d3e2e] hover:text-[#1a2519] transition-colors"
             >
               Create one now
             </Link>

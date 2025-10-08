@@ -10,12 +10,12 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-white/10 backdrop-blur-md border-b border-white/10 sticky top-0 z-50 shadow-md">
+    <nav className="bg-[#d4d9c8]/80 backdrop-blur-md border-b border-[#2d3e2e]/10 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-14">
           {/* Logo */}
           <Link to="/" className="flex items-center group">
-            <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center mr-2 shadow-md shadow-indigo-500/40 group-hover:shadow-indigo-500/60 transition-all duration-200 group-hover:scale-105">
+            <div className="w-8 h-8 bg-[#2d3e2e] rounded-lg flex items-center justify-center mr-2 transition-colors group-hover:bg-[#1a2519]">
               <svg
                 className="w-4 h-4 text-white"
                 fill="none"
@@ -30,24 +30,22 @@ export default function Navbar() {
                 />
               </svg>
             </div>
-            <span className="text-xl font-semibold bg-gradient-to-r from-indigo-200 to-purple-200 bg-clip-text text-transparent group-hover:from-indigo-100 group-hover:to-purple-100 transition-all duration-300">
-              FinAuth
-            </span>
+            <span className="text-xl font-light text-[#2d3e2e]">FinAuth</span>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-1.5">
             <Link
               to="/"
-              className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+              className={`px-4 py-1.5 rounded-full text-sm transition-all ${
                 isActive("/")
-                  ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md shadow-indigo-500/40"
-                  : "text-gray-200 hover:bg-white/10 hover:text-white"
+                  ? "bg-[#2d3e2e] text-[#d4d9c8]"
+                  : "text-[#4a5a4a] hover:bg-[#2d3e2e]/5 hover:text-[#2d3e2e]"
               }`}
             >
               <span className="flex items-center gap-2">
                 <svg
-                  className="w-3.5 h-3.5"
+                  className="w-4 h-4"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -64,15 +62,15 @@ export default function Navbar() {
             </Link>
             <Link
               to="/login"
-              className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+              className={`px-4 py-1.5 rounded-full text-sm transition-all ${
                 isActive("/login")
-                  ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md shadow-indigo-500/40"
-                  : "text-gray-200 hover:bg-white/10 hover:text-white"
+                  ? "bg-[#2d3e2e] text-[#d4d9c8]"
+                  : "text-[#4a5a4a] hover:bg-[#2d3e2e]/5 hover:text-[#2d3e2e]"
               }`}
             >
               <span className="flex items-center gap-2">
                 <svg
-                  className="w-3.5 h-3.5"
+                  className="w-4 h-4"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -89,15 +87,15 @@ export default function Navbar() {
             </Link>
             <Link
               to="/register"
-              className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+              className={`px-4 py-1.5 rounded-full text-sm transition-all ${
                 isActive("/register")
-                  ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md shadow-indigo-500/40"
-                  : "text-gray-200 hover:bg-white/10 hover:text-white"
+                  ? "bg-[#2d3e2e] text-[#d4d9c8]"
+                  : "text-[#4a5a4a] hover:bg-[#2d3e2e]/5 hover:text-[#2d3e2e]"
               }`}
             >
               <span className="flex items-center gap-2">
                 <svg
-                  className="w-3.5 h-3.5"
+                  className="w-4 h-4"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -114,15 +112,15 @@ export default function Navbar() {
             </Link>
             <Link
               to="/transactions/new"
-              className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+              className={`px-4 py-1.5 rounded-full text-sm transition-all ${
                 isActive("/transactions/new")
-                  ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md shadow-indigo-500/40"
-                  : "text-gray-200 hover:bg-white/10 hover:text-white"
+                  ? "bg-[#2d3e2e] text-[#d4d9c8]"
+                  : "text-[#4a5a4a] hover:bg-[#2d3e2e]/5 hover:text-[#2d3e2e]"
               }`}
             >
               <span className="flex items-center gap-2">
                 <svg
-                  className="w-3.5 h-3.5"
+                  className="w-4 h-4"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -145,15 +143,15 @@ export default function Navbar() {
             </Link>
             <Link
               to="/upload-csv"
-              className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+              className={`px-4 py-1.5 rounded-full text-sm transition-all ${
                 isActive("/upload-csv")
-                  ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md shadow-indigo-500/40"
-                  : "text-gray-200 hover:bg-white/10 hover:text-white"
+                  ? "bg-[#2d3e2e] text-[#d4d9c8]"
+                  : "text-[#4a5a4a] hover:bg-[#2d3e2e]/5 hover:text-[#2d3e2e]"
               }`}
             >
               <span className="flex items-center gap-2">
                 <svg
-                  className="w-3.5 h-3.5"
+                  className="w-4 h-4"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -173,7 +171,7 @@ export default function Navbar() {
           {/* Mobile menu button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-md text-gray-200 hover:bg-white/10 transition-colors"
+            className="md:hidden p-2 rounded-md text-[#2d3e2e] hover:bg-[#2d3e2e]/5 transition-colors"
           >
             {mobileMenuOpen ? (
               <svg
@@ -209,14 +207,14 @@ export default function Navbar() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden pb-4 space-y-2 animate-slide-in-up">
+          <div className="md:hidden pb-4 space-y-2">
             <Link
               to="/"
               onClick={() => setMobileMenuOpen(false)}
-              className={`block px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
+              className={`block px-4 py-3 rounded-2xl text-sm transition-all ${
                 isActive("/")
-                  ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg"
-                  : "text-gray-200 hover:bg-white/10"
+                  ? "bg-[#2d3e2e] text-[#d4d9c8] shadow"
+                  : "text-[#4a5a4a] hover:bg-[#2d3e2e]/5 hover:text-[#2d3e2e]"
               }`}
             >
               <span className="flex items-center gap-2">
@@ -239,10 +237,10 @@ export default function Navbar() {
             <Link
               to="/login"
               onClick={() => setMobileMenuOpen(false)}
-              className={`block px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
+              className={`block px-4 py-3 rounded-2xl text-sm transition-all ${
                 isActive("/login")
-                  ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg"
-                  : "text-gray-200 hover:bg-white/10"
+                  ? "bg-[#2d3e2e] text-[#d4d9c8] shadow"
+                  : "text-[#4a5a4a] hover:bg-[#2d3e2e]/5 hover:text-[#2d3e2e]"
               }`}
             >
               <span className="flex items-center gap-2">
@@ -265,10 +263,10 @@ export default function Navbar() {
             <Link
               to="/register"
               onClick={() => setMobileMenuOpen(false)}
-              className={`block px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
+              className={`block px-4 py-3 rounded-2xl text-sm transition-all ${
                 isActive("/register")
-                  ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg"
-                  : "text-gray-200 hover:bg-white/10"
+                  ? "bg-[#2d3e2e] text-[#d4d9c8] shadow"
+                  : "text-[#4a5a4a] hover:bg-[#2d3e2e]/5 hover:text-[#2d3e2e]"
               }`}
             >
               <span className="flex items-center gap-2">
@@ -291,15 +289,15 @@ export default function Navbar() {
             <Link
               to="/transactions/new"
               onClick={() => setMobileMenuOpen(false)}
-              className={`block px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
+              className={`block px-4 py-3 rounded-2xl text-sm transition-all ${
                 isActive("/transactions/new")
-                  ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg"
-                  : "text-gray-200 hover:bg-white/10"
+                  ? "bg-[#2d3e2e] text-[#d4d9c8] shadow"
+                  : "text-[#4a5a4a] hover:bg-[#2d3e2e]/5 hover:text-[#2d3e2e]"
               }`}
             >
               <span className="flex items-center gap-2">
                 <svg
-                  className="w-4 h-4"
+                  className="W-4 h-4"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -323,10 +321,10 @@ export default function Navbar() {
             <Link
               to="/upload-csv"
               onClick={() => setMobileMenuOpen(false)}
-              className={`block px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
+              className={`block px-4 py-3 rounded-2xl text-sm transition-all ${
                 isActive("/upload-csv")
-                  ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg"
-                  : "text-gray-200 hover:bg-white/10"
+                  ? "bg-[#2d3e2e] text-[#d4d9c8] shadow"
+                  : "text-[#4a5a4a] hover:bg-[#2d3e2e]/5 hover:text-[#2d3e2e]"
               }`}
             >
               <span className="flex items-center gap-2">

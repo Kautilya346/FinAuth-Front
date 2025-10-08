@@ -1,10 +1,35 @@
+@font-face {
+  font-family: "TT Firs Neue";
+  src: url("./tt_firs_neue/TT Firs Neue Trial Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TT Firs Neue";
+  src: url("./tt_firs_neue/TT Firs Neue Trial Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TT Firs Neue";
+  src: url("./tt_firs_neue/TT Firs Neue Trial Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    font-family: 'Inter', system-ui, -apple-system, Avenir, Helvetica, Arial, sans-serif;
+    font-family: "TT Firs Neue", system-ui, -apple-system, Avenir, Helvetica,
+      Arial, sans-serif;
     line-height: 1.6;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
@@ -36,7 +61,8 @@
   }
 
   @keyframes float {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateY(0px);
     }
     50% {
@@ -65,7 +91,8 @@
   }
 
   @keyframes pulse-glow {
-    0%, 100% {
+    0%,
+    100% {
       opacity: 1;
     }
     50% {
@@ -135,7 +162,7 @@
   /* Input focus glow */
   .input-glow:focus {
     box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1),
-                0 0 20px rgba(99, 102, 241, 0.2);
+      0 0 20px rgba(99, 102, 241, 0.2);
   }
 }
 
