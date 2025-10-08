@@ -5,12 +5,13 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import TransactionFormPage from "./pages/TransactionFormPage";
 import CsvUploadPage from "./pages/CsvUploadPage";
+import Footer from "./components/Footer";
 import "./index.css";
 
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-[#d4d9c8] flex flex-col">
         <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -19,6 +20,7 @@ function App() {
           <Route path="/transactions/new" element={<TransactionFormPage />} />
           <Route path="/upload-csv" element={<CsvUploadPage />} />
         </Routes>
+        <Footer />
       </div>
     </Router>
   );
