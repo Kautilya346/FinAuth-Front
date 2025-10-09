@@ -19,27 +19,28 @@ export default function PhoneVerificationPage() {
     setError(null);
 
     try {
-      const apiUrl = `${import.meta.env.VITE_API_URL}/onboarding/start-verification`;
-      const res = await fetch(apiUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phoneNumber: phoneNumber.trim() }),
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/onboarding/verify-phone`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone: phoneNumber.trim() })
       });
 
-      const data = await res.json();
+      const result = await response.json();
 
-      if (res.ok && data.verified === true) {
-        // Success - redirect to KYC verification page
+      if (result.success) {
+        console.log('✅ Phone verified successfully!');
+        // Proceed with next step - redirect to KYC verification page
         navigate("/onboarding/kyc-verification", { 
           state: { phoneNumber: phoneNumber.trim() } 
         });
       } else {
-        // Verification failed
-        setError(data.message || "Phone number verification failed. Please try again.");
+        console.log('❌ Verification failed:', result.error);
+        // Show error message to user
+        setError(result.error || "Phone number verification failed. Please try again.");
         setLoading(false);
       }
-    } catch (err) {
-      console.error("Error during phone verification:", err);
+    } catch (error) {
+      console.error('Verification error:', error);
       setError("An error occurred during verification. Please try again.");
       setLoading(false);
     }

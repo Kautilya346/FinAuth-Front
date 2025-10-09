@@ -8,10 +8,10 @@ export default function KycVerificationPage() {
 
   const [formData, setFormData] = useState({
     phoneNumber: initialPhoneNumber,
-    kycId: "",
+    idDocument: "",
     name: "",
     address: "",
-    dob: "",
+    birthdate: "",
   });
   const [loading, setLoading] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
@@ -40,16 +40,17 @@ export default function KycVerificationPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           phoneNumber: formData.phoneNumber.trim(),
-          kycId: formData.kycId.trim(),
+          idDocument: formData.idDocument.trim(),
           name: formData.name.trim(),
           address: formData.address.trim(),
-          dob: formData.dob,
+          birthdate: formData.birthdate,
         }),
       });
 
       const data = await res.json();
+      console.log(data)
 
-      if (res.ok && data.verified === true) {
+      if (res.ok && data.success === true) {
         // KYC verification successful
         setDialogType("success");
         setShowDialog(true);
@@ -169,8 +170,8 @@ export default function KycVerificationPage() {
                 </div>
                 <input
                   type="text"
-                  name="kycId"
-                  value={formData.kycId}
+                  name="idDocument"
+                  value={formData.idDocument}
                   onChange={handleChange}
                   required
                   className="w-full pl-11 pr-4 py-3 bg-white border border-[#2d3e2e]/20 rounded-lg text-[#2d3e2e] placeholder-[#4a5a4a] focus:outline-none focus:ring-2 focus:ring-[#2d3e2e] focus:border-transparent transition-all duration-200"
@@ -274,8 +275,8 @@ export default function KycVerificationPage() {
                 </div>
                 <input
                   type="date"
-                  name="dob"
-                  value={formData.dob}
+                  name="birthdate"
+                  value={formData.birthdate}
                   onChange={handleChange}
                   required
                   className="w-full pl-11 pr-4 py-3 bg-white border border-[#2d3e2e]/20 rounded-lg text-[#2d3e2e] placeholder-[#4a5a4a] focus:outline-none focus:ring-2 focus:ring-[#2d3e2e] focus:border-transparent transition-all duration-200"
