@@ -1,4 +1,4 @@
-# FinAuth Frontend
+# SecureGate Frontend
 
 A modern, secure React application for financial authentication and user onboarding, built with Vite, React Router, and Tailwind CSS.
 

@@ -124,7 +124,7 @@ export default function OnboardingRegistration() {
             Create Your Account
           </h1>
           <p className="text-[#4a5a4a] max-w-2xl mx-auto text-sm">
-            Join FinAuth today. Fill in your details to get started with secure
+            Join SecureGate today. Fill in your details to get started with secure
             financial authentication.
           </p>
         </div>

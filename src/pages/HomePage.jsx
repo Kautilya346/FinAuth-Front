@@ -19,7 +19,7 @@ export default function HomePage() {
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-light text-[#2d3e2e] mb-4 tracking-tight">
             Welcome to
             <br />
-            <span className="italic font-serif">FinAuth</span>
+            <span className="italic font-serif">SecureGate</span>
           </h1>
 
           <p className="text-lg md:text-xl text-[#4a5a4a] max-w-2xl mx-auto leading-relaxed mb-12">

@@ -6,6 +6,7 @@ import TransactionFormPage from "./pages/TransactionFormPage";
 import CsvUploadPage from "./pages/CsvUploadPage";
 import PhoneVerificationPage from "./pages/PhoneVerificationPage";
 import OnboardingRegistration from "./components/OnboardingRegistration";
+import FraudDetectionPage from "./pages/FraudDetectionPage";
 import Footer from "./components/Footer";
 import "./index.css";
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/transactions/new" element={<TransactionFormPage />} />
           <Route path="/upload-csv" element={<CsvUploadPage />} />
+          <Route path="/fraud-detection" element={<FraudDetectionPage />} />
           <Route
             path="/onboarding/phone-verification"
             element={<PhoneVerificationPage />}

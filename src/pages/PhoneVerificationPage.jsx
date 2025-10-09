@@ -13,32 +13,6 @@ export default function PhoneVerificationPage() {
 
     setLoading(true);
 
-<<<<<<< HEAD
-    try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/onboarding/verify-phone`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone: phoneNumber.trim() })
-      });
-
-      const result = await response.json();
-
-      if (result.success) {
-        console.log('✅ Phone verified successfully!');
-        // Proceed with next step - redirect to KYC verification page
-        navigate("/onboarding/kyc-verification", { 
-          state: { phoneNumber: phoneNumber.trim() } 
-        });
-      } else {
-        console.log('❌ Verification failed:', result.error);
-        // Show error message to user
-        setError(result.error || "Phone number verification failed. Please try again.");
-        setLoading(false);
-      }
-    } catch (error) {
-      console.error('Verification error:', error);
-      setError("An error occurred during verification. Please try again.");
-=======
     // Show processing toast
     const processingToast = toast.loading(
       "Processing request and sending to NAC verification API..."
@@ -54,7 +28,6 @@ export default function PhoneVerificationPage() {
         `📡 NAC API Response: { status: "verified", timestamp: "${new Date().toISOString()}", carrier: "detected", sim_status: "active" }`
       );
 
->>>>>>> e5c7e93fdac323e075fda766640dbfc894f58f0d
       setLoading(false);
       toast.success("Phone verification successful");
       navigate("/kyc-registration");
