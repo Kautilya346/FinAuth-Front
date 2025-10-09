@@ -300,10 +300,10 @@ export default function Login() {
           <p className="mt-6 text-center text-[#4a5a4a] text-sm">
             Don't have an account?{" "}
             <Link
-              to="/register"
+              to="/onboarding/phone-verification"
               className="font-semibold text-[#2d3e2e] hover:text-[#1a2519] transition-colors"
             >
-              Create one now
+              Start Onboarding
             </Link>
           </p>
         </div>

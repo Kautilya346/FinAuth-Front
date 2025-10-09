@@ -14,8 +14,8 @@ export default function OnboardingRegistration() {
     email: "",
     password: "",
     dob: "",
-    gender: "",
   });
+  const [idFile, setIdFile] = useState(null);
   const [submitting, setSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -24,24 +24,39 @@ export default function OnboardingRegistration() {
     setFormData((p) => ({ ...p, [name]: value }));
   };
 
+  const handleFileChange = (e) => {
+    setIdFile(e.target.files[0] ?? null);
+  };
+
+  const fileToBase64 = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (err) => reject(err);
+      reader.readAsDataURL(file);
+    });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (submitting) return;
 
+
     setSubmitting(true);
     try {
+
       const payload = {
         name: formData.name,
-        password: formData.password,
-        gender: formData.gender,
-        phone_number: `${formData.countryCode}${formData.phone}`,
+        countryCode: formData.countryCode,
+        phone: formData.phone,
+        kycId: formData.kycId,
+        accountNumber: formData.accountNumber,
         email: formData.email,
-        account_number: formData.accountNumber,
-        kyc_id: formData.kycId,
-        date_of_birth: formData.dob
+        password: formData.password,
+        dob: formData.dob,
+        
       };
 
-      const apiUrl = "http://localhost:4000/api/auth/register";
+      const apiUrl = `${import.meta.env.VITE_API_URL}/api/auth/register`;
 
       const res = await fetch(apiUrl, {
         method: "POST",
@@ -52,29 +67,23 @@ export default function OnboardingRegistration() {
       if (res.ok) {
         const json = await res.json();
         console.log("Registration success:", json);
-        
-        if (json.success) {
-          alert("Registration successful! Please login to continue.");
-          setFormData({
-            name: "",
-            countryCode: "+99",
-            phone: "",
-            kycId: "",
-            accountNumber: "",
-            email: "",
-            password: "",
-            dob: "",
-            gender: "",
-          });
-          navigate("/login");
-        } else {
-          alert("Registration failed: " + (json.message || "Unknown error"));
-        }
+        alert("Registration successful!");
+        setFormData({
+          name: "",
+          countryCode: "+99",
+          phone: "",
+          kycId: "",
+          accountNumber: "",
+          email: "",
+          password: "",
+          dob: "",
+        });
+        setIdFile(null);
+        navigate("/");
       } else {
-        const errorResponse = await res.json().catch(() => null);
-        const errorMessage = errorResponse?.message || `HTTP ${res.status}`;
-        console.error("Registration failed:", res.status, errorResponse);
-        alert("Registration failed: " + errorMessage);
+        const text = await res.text();
+        console.error("Registration failed:", res.status, text);
+        alert("Registration failed: " + (text || res.status));
       }
     } catch (err) {
       console.error(err);
@@ -158,61 +167,6 @@ export default function OnboardingRegistration() {
             </div>
           </div>
 
-          {/* Gender */}
-          <div>
-            <label
-              htmlFor="gender"
-              className="block text-sm font-medium text-[#2d3e2e] mb-2"
-            >
-              Gender
-            </label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                <svg
-                  className="w-4 h-4 text-[#4a5a4a]"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                  />
-                </svg>
-              </div>
-              <select
-                id="gender"
-                name="gender"
-                value={formData.gender}
-                onChange={handleChange}
-                className="w-full pl-11 pr-4 py-3 bg-white border border-[#2d3e2e]/20 rounded-lg text-[#2d3e2e] focus:outline-none focus:ring-2 focus:ring-[#2d3e2e] transition-all duration-200 appearance-none"
-              >
-                <option value="">Select Gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-                <option value="prefer_not_to_say">Prefer not to say</option>
-              </select>
-              <div className="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none">
-                <svg
-                  className="w-4 h-4 text-[#4a5a4a]"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </div>
-            </div>
-          </div>
-
           {/* Phone Number */}
           <div>
             <label
@@ -228,9 +182,6 @@ export default function OnboardingRegistration() {
                 onChange={handleChange}
                 className="px-3.5 py-3 bg-white border border-[#2d3e2e]/20 rounded-lg text-[#2d3e2e] focus:outline-none focus:ring-2 focus:ring-[#2d3e2e] transition-all duration-200"
               >
-                <option value="+99" className="bg-white">
-                  XX (+99)
-                </option>
                 <option value="+91" className="bg-white">
                   IN (+91)
                 </option>
@@ -499,6 +450,48 @@ export default function OnboardingRegistration() {
             </div>
           </div>
 
+          {/* ID Proof Upload */}
+          <div>
+            <label
+              htmlFor="idProof"
+              className="block text-sm font-medium text-[#2d3e2e] mb-2"
+            >
+              Upload ID Proof <span className="text-red-400">*</span>
+            </label>
+            <div className="relative">
+              <input
+                type="file"
+                id="idProof"
+                name="idProof"
+                onChange={handleFileChange}
+                required
+                accept="image/png, image/jpeg, application/pdf"
+                className="w-full text-sm text-[#2d3e2e] file:mr-3 file:py-2.5 file:px-5 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-[#2d3e2e] file:text-[#d4d9c8] hover:file:bg-[#1a2519] file:cursor-pointer file:transition-all file:duration-200 bg-white border border-[#2d3e2e]/20 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-[#2d3e2e]"
+              />
+              {idFile && (
+                <div className="mt-2 flex items-center gap-2 text-sm text-[#2d3e2e]">
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  {idFile.name}
+                </div>
+              )}
+            </div>
+            <p className="text-xs text-[#4a5a4a] mt-2">
+              PNG, JPG, or PDF files are accepted. Max 5MB.
+            </p>
+          </div>
+
           {/* Submit Button */}
           <button
             type="submit"
@@ -552,12 +545,12 @@ export default function OnboardingRegistration() {
 
         {/* Sign in link */}
         <p className="mt-6 text-center text-[#4a5a4a] text-sm">
-          Already have an account?{" "}
+          Already completed onboarding?{" "}
           <Link
-            to="/login"
+            to="/"
             className="font-semibold text-[#2d3e2e] hover:text-[#1a2519] transition-colors"
           >
-            Sign in instead
+            Go to Home
           </Link>
         </p>
       </div>
