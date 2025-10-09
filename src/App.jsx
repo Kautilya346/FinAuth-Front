@@ -7,6 +7,7 @@ import CsvUploadPage from "./pages/CsvUploadPage";
 import PhoneVerificationPage from "./pages/PhoneVerificationPage";
 import OnboardingRegistration from "./components/OnboardingRegistration";
 import FraudDetectionPage from "./pages/FraudDetectionPage";
+import KycRegistration from "./pages/KycRegistration";
 import Footer from "./components/Footer";
 import "./index.css";
 
@@ -27,7 +28,7 @@ function App() {
           />
           <Route
             path="/kyc-registration"
-            element={<OnboardingRegistration />}
+            element={< KycRegistration/>}
           />
         </Routes>
         <Footer />
